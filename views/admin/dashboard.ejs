@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Ariatech</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="theme-light admin-body">
+  <header class="top-nav admin-nav">
+    <div class="nav-left">
+      <a href="/" class="logo">Ariatech</a>
+      <span class="admin-badge">Admin</span>
+    </div>
+    <div class="nav-right">
+      <a href="/admin/products/new" class="btn-primary">+ Add product</a>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <h1>Products</h1>
+    <div class="admin-table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (products && products.length) { %>
+            <% products.forEach(function(product) { %>
+              <tr>
+                <td><%= product.name %></td>
+                <td><%= product.brand || '-' %></td>
+                <td><%= product.category || '-' %></td>
+                <td>$<%= product.price.toFixed(2) %></td>
+                <td class="admin-actions">
+                  <form action="/admin/products/<%= product.id %>/delete" method="post" onsubmit="return confirm('Delete this product?');">
+                    <button type="submit" class="btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="5">No products yet. <a href="/admin/products/new">Add your first product</a>.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

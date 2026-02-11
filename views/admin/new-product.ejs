@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add product | Ariatech Admin</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body class="theme-light admin-body">
+  <header class="top-nav admin-nav">
+    <div class="nav-left">
+      <a href="/" class="logo">Ariatech</a>
+      <span class="admin-badge">Admin</span>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <h1>Add product</h1>
+    <form class="admin-form" action="/admin/products" method="post" enctype="multipart/form-data">
+      <div class="form-row">
+        <label for="name">Name *</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-row">
+        <label for="brand">Brand</label>
+        <input type="text" id="brand" name="brand" />
+      </div>
+      <div class="form-row">
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" placeholder="Laptops, Desktops, Accessories" />
+      </div>
+      <div class="form-row">
+        <label for="price">Price (USD) *</label>
+        <input type="number" step="0.01" id="price" name="price" required />
+      </div>
+      <div class="form-row">
+        <label for="imageFile">Image file</label>
+        <input type="file" id="imageFile" name="imageFile" accept="image/*" />
+      </div>
+      <div class="form-row">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4"></textarea>
+      </div>
+      <div class="form-actions">
+        <a href="/admin" class="btn-secondary">Cancel</a>
+        <button type="submit" class="btn-primary">Save</button>
+      </div>
+    </form>
+  </main>
+</body>
+
+</html>

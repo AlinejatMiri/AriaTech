@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ariatech Computers - Online Store</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="theme-light">
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="/" class="logo">Ariatech</a>
+      <div class="nav-location">
+        <span class="nav-label">Deliver to</span>
+        <span class="nav-bold">Your City</span>
+      </div>
+    </div>
+    <div class="nav-center">
+      <form class="search-bar" action="/" method="get">
+        <select name="category" class="search-category">
+          <option value="all">All</option>
+          <option value="laptops">Laptops</option>
+          <option value="desktops">Desktops</option>
+          <option value="accessories">Accessories</option>
+        </select>
+        <input type="text" name="q" placeholder="Search Ariatech computers" class="search-input" />
+        <button class="search-button" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="nav-right">
+      <a href="/admin" class="nav-link">Admin</a>
+      <a href="#" class="nav-link">Orders</a>
+      <a href="#" class="nav-link cart-link">Cart</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h1>Upgrade your setup</h1>
+        <p>Shop the latest laptops, gaming rigs, and accessories.</p>
+        <a href="#products" class="btn-primary">Shop deals</a>
+      </div>
+    </section>
+
+    <section id="products" class="product-grid-section">
+      <h2>Featured products</h2>
+      <div class="product-grid">
+        <% if (products && products.length) { %>
+          <% products.forEach(function(product) { %>
+            <article class="product-card">
+              <a href="/product/<%= product.id %>">
+                <div class="product-image-wrapper">
+                  <img src="<%= product.imageUrl %>" alt="<%= product.name %>" />
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title"><%= product.name %></h3>
+                  <% if (product.brand) { %>
+                    <p class="product-brand"><%= product.brand %></p>
+                  <% } %>
+                  <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                  <% if (product.category) { %>
+                    <span class="product-category"><%= product.category %></span>
+                  <% } %>
+                </div>
+              </a>
+              <button class="btn-secondary">Add to cart</button>
+            </article>
+          <% }); %>
+        <% } else { %>
+          <p>No products yet. Visit the <a href="/admin">admin dashboard</a> to add some.</p>
+        <% } %>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a href="#" class="back-to-top">Back to top</a>
+    </div>
+    <div class="footer-columns">
+      <div>
+        <h4>Get to know us</h4>
+        <a href="#">About Ariatech</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Make money with us</h4>
+        <a href="#">Sell computers</a>
+        <a href="#">Affiliate program</a>
+      </div>
+      <div>
+        <h4>Let us help you</h4>
+        <a href="#">Your account</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <%= new Date().getFullYear() %> Ariatech Computers</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "computer-store",
+  "version": "1.0.0",
+  "description": "Responsive Amazon-like computer store with admin dashboard (Node.js/Express)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "multer": "^2.0.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
