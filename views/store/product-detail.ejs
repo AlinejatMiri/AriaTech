@@ -31,7 +31,7 @@
 
   <main class="product-detail-layout">
     <div class="detail-image">
-      <img src="<%= product.imageUrl %>" alt="<%= product.name %>" />
+      <img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" />
     </div>
     <div class="detail-info">
       <h1><%= product.name %></h1>
