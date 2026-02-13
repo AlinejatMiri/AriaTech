@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "ecfdf90c-03f1-4375-9c73-6a7376730406",
+    "name": "amd radeon 800",
+    "brand": "msi",
+    "price": 4700,
+    "category": "Laptop",
+    "imageUrl": "/uploads/products/1770999436932-625873205.gif",
+    "description": "this is a very big shit in the world"
+  }
+]

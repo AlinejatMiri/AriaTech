@@ -4,9 +4,13 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
+const session = require('express-session');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'ariatech123';
 
 // Paths
 const DATA_FILE = path.join(__dirname, 'data', 'products.json');
@@ -41,6 +45,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+  secret: 'ariatech-admin-secret-key-2024',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
+}));
+
+function isAuthenticated(req, res, next) {
+  if (req.session.isAdmin) {
+    return next();
+  }
+  res.redirect('/admin/login');
+}
 
 // Multer configuration for product image uploads
 const storage = multer.diskStorage({
@@ -84,17 +102,36 @@ app.get('/product/:id', (req, res) => {
   res.render('store/product-detail', { product });
 });
 
-// Simple admin (no auth, for demo)
-app.get('/admin', (req, res) => {
+// Admin login page
+app.get('/admin/login', (req, res) => {
+  res.render('admin/login', { error: null });
+});
+
+app.post('/admin/login', (req, res) => {
+  const { username, password } = req.body;
+  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+    req.session.isAdmin = true;
+    return res.redirect('/admin');
+  }
+  res.render('admin/login', { error: 'Invalid credentials' });
+});
+
+app.get('/admin/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/admin/login');
+});
+
+// Protected admin routes
+app.get('/admin', isAuthenticated, (req, res) => {
   const products = readProducts();
   res.render('admin/dashboard', { products });
 });
 
-app.get('/admin/products/new', (req, res) => {
+app.get('/admin/products/new', isAuthenticated, (req, res) => {
   res.render('admin/new-product');
 });
 
-app.post('/admin/products', upload.single('imageFile'), (req, res) => {
+app.post('/admin/products', isAuthenticated, upload.single('imageFile'), (req, res) => {
   const products = readProducts();
   const { name, brand, price, category, imageUrl, description } = req.body;
 
@@ -134,7 +171,7 @@ app.use((err, req, res, next) => {
   next(err);
 });
 
-app.post('/admin/products/:id/delete', (req, res) => {
+app.post('/admin/products/:id/delete', isAuthenticated, (req, res) => {
   let products = readProducts();
   products = products.filter(p => p.id !== req.params.id);
   writeProducts(products);
