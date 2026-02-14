@@ -15,9 +15,15 @@
       <form class="search-bar" action="/" method="get">
         <select name="category" class="search-category">
           <option value="all">All</option>
-          <option value="laptops">Laptops</option>
-          <option value="desktops">Desktops</option>
-          <option value="accessories">Accessories</option>
+          <option value="computer-parts">Computer Parts</option>
+          <option value="computer">Computer</option>
+          <option value="peripherals">Peripherals</option>
+          <option value="storage">Storage</option>
+          <option value="games-and-hobbies">Games and Hobbies</option>
+          <option value="network">Network</option>
+          <option value="office-supplies">Office Supplies</option>
+          <option value="software">Software</option>
+          <option value="accessory">Accessory</option>
         </select>
         <input type="text" name="q" placeholder="Search Ariatech computers" class="search-input" />
         <button class="search-button" type="submit">Search</button>
@@ -45,9 +51,34 @@
       <% if (product.description) { %>
         <p class="detail-description"><%= product.description %></p>
       <% } %>
-      <button class="btn-primary">Add to cart</button>
+      <a href="/product/<%= product.id %>" class="btn-primary">Learn more</a>
     </div>
   </main>
+
+  <% if (relatedProducts && relatedProducts.length > 0) { %>
+  <section class="related-products">
+    <h2>More from <%= product.category %></h2>
+    <div class="related-products-slider">
+      <% relatedProducts.forEach(function(relatedProduct) { %>
+        <article class="product-card">
+          <a href="/product/<%= relatedProduct.id %>">
+            <div class="product-image-wrapper">
+              <img src="<%= relatedProduct.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= relatedProduct.name %>" />
+            </div>
+            <div class="product-info">
+              <h3 class="product-title"><%= relatedProduct.name %></h3>
+              <% if (relatedProduct.brand) { %>
+                <p class="product-brand"><%= relatedProduct.brand %></p>
+              <% } %>
+              <p class="product-price">$<%= relatedProduct.price.toFixed(2) %></p>
+            </div>
+          </a>
+          <a href="/product/<%= relatedProduct.id %>" class="btn-secondary">Learn more</a>
+        </article>
+      <% }); %>
+    </div>
+  </section>
+  <% } %>
 
   <footer class="site-footer">
     <div class="footer-bottom">

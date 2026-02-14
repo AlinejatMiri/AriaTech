@@ -18,8 +18,88 @@
     </div>
   </header>
 
-  <main class="admin-main">
-    <h1>Products</h1>
+<main class="admin-main">
+    <h1>Slider Images</h1>
+    <div class="slider-upload-section">
+      <form id="sliderUploadForm" enctype="multipart/form-data">
+        <div class="form-row">
+          <label for="sliderFile">Add Slider Image</label>
+          <input type="file" id="sliderFile" name="sliderFile" accept="image/*" required />
+        </div>
+        <button type="submit" class="btn-primary">Upload Slider Image</button>
+      </form>
+      <div id="sliderUploadStatus"></div>
+    </div>
+    <div class="admin-table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Uploaded</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (sliderImages && sliderImages.length) { %>
+            <% sliderImages.forEach(function(image) { %>
+              <tr>
+                <td><img src="<%= image.image_url %>" alt="Slider" style="width: 150px; height: auto; object-fit: cover;" /></td>
+                <td><%= new Date(image.created_at).toLocaleString() %></td>
+                <td class="admin-actions">
+                  <form action="/admin/slider/<%= image.id %>/delete" method="post" onsubmit="return confirm('Delete this slider image?');">
+                    <button type="submit" class="btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="3">No slider images yet. Upload one above.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <h1 style="margin-top: 40px;">Special Products</h1>
+    <div class="admin-table-wrapper special-products-table">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (specialProducts && specialProducts.length) { %>
+            <% specialProducts.forEach(function(product) { %>
+              <tr>
+                <td><img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" style="width: 60px; height: auto; object-fit: cover;" /></td>
+                <td><%= product.name %></td>
+                <td><%= product.brand || '-' %></td>
+                <td><%= product.category || '-' %></td>
+                <td>$<%= product.price.toFixed(2) %></td>
+                <td class="admin-actions">
+                  <form action="/admin/products/<%= product.id %>/delete" method="post" onsubmit="return confirm('Delete this product?');">
+                    <button type="submit" class="btn-danger">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } else { %>
+            <tr>
+              <td colspan="6">No special products yet. Mark products as special when adding.</td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <h1 style="margin-top: 40px;">Products</h1>
     <div class="admin-table-wrapper">
       <table class="admin-table">
         <thead>
@@ -53,7 +133,41 @@
           <% } %>
         </tbody>
       </table>
-    </div>
+</div>
   </main>
+
+  <script>
+    document.getElementById('sliderUploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      const fileInput = document.getElementById('sliderFile');
+      
+      if (!fileInput.files[0]) {
+        document.getElementById('sliderUploadStatus').innerHTML = '<p class="error">Please select a file</p>';
+        return;
+      }
+
+      formData.append('sliderFile', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/admin/upload-slider', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('sliderUploadStatus').innerHTML = '<p class="success">Slider image uploaded successfully!</p>';
+          fileInput.value = '';
+          setTimeout(() => window.location.reload(), 1000);
+        } else {
+          document.getElementById('sliderUploadStatus').innerHTML = '<p class="error">' + result.error + '</p>';
+        }
+      } catch (err) {
+        document.getElementById('sliderUploadStatus').innerHTML = '<p class="error">Upload failed: ' + err.message + '</p>';
+      }
+    });
+  </script>
 </body>
 </html>

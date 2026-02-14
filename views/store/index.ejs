@@ -19,9 +19,15 @@
       <form class="search-bar" action="/" method="get">
         <select name="category" class="search-category">
           <option value="all">All</option>
-          <option value="laptops">Laptops</option>
-          <option value="desktops">Desktops</option>
-          <option value="accessories">Accessories</option>
+          <option value="computer-parts">Computer Parts</option>
+          <option value="computer">Computer</option>
+          <option value="peripherals">Peripherals</option>
+          <option value="storage">Storage</option>
+          <option value="games-and-hobbies">Games and Hobbies</option>
+          <option value="network">Network</option>
+          <option value="office-supplies">Office Supplies</option>
+          <option value="software">Software</option>
+          <option value="accessory">Accessory</option>
         </select>
         <input type="text" name="q" placeholder="Search Ariatech computers" class="search-input" />
         <button class="search-button" type="submit">Search</button>
@@ -35,43 +41,140 @@
   </header>
 
   <main>
-    <section class="hero-banner">
-      <div class="hero-content">
-        <h1>Upgrade your setup</h1>
-        <p>Shop the latest laptops, gaming rigs, and accessories.</p>
-        <a href="#products" class="btn-primary">Shop deals</a>
-      </div>
-    </section>
+    <div class="main-layout">
+      <aside class="category-sidebar" >
+        <h3>Categories</h3>
+        <ul class="sidebar-menu">
+          <li><a href="/?category=all">All Products</a></li>
+          <li><a href="/?category=computer-parts">Computer Parts</a></li>
+          <li><a href="/?category=oem-packages">OEM Packages</a></li>
+          <li><a href="/?category=computer">Computer</a></li>
+          <li><a href="/?category=peripherals">Peripherals</a></li>
+          <li><a href="/?category=storage">Storage</a></li>
+          <li><a href="/?category=games-and-hobbies">Games and Hobbies</a></li>
+          <li><a href="/?category=network">Network</a></li>
+          <li><a href="/?category=office-supplies">Office Supplies</a></li>
+          <li><a href="/?category=software">Software</a></li>
+          <li><a href="/?category=accessory">Accessory</a></li>
+        </ul>
+      </aside>
 
-    <section id="products" class="product-grid-section">
-      <h2>Featured products</h2>
-      <div class="product-grid">
-        <% if (products && products.length) { %>
-          <% products.forEach(function(product) { %>
-            <article class="product-card">
-              <a href="/product/<%= product.id %>">
-                <div class="product-image-wrapper">
-                  <img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" />
-                </div>
-                <div class="product-info">
-                  <h3 class="product-title"><%= product.name %></h3>
-                  <% if (product.brand) { %>
-                    <p class="product-brand"><%= product.brand %></p>
-                  <% } %>
-                  <p class="product-price">$<%= product.price.toFixed(2) %></p>
-                  <% if (product.category) { %>
-                    <span class="product-category"><%= product.category %></span>
-                  <% } %>
-                </div>
-              </a>
-              <button class="btn-secondary">Add to cart</button>
-            </article>
-          <% }); %>
+      <div class="slider-and-products">
+        <% if (sliderImages && sliderImages.length > 0) { %>
+        <section class="hero-slider">
+          <div class="slider-container">
+            <% sliderImages.forEach(function(image, index) { %>
+              <div class="slider-slide<%= index === 0 ? ' active' : '' %>">
+                <img src="<%= image.image_url %>" alt="Slider <%= index + 1 %>" />
+              </div>
+            <% }); %>
+            <button class="slider-prev">&#10094;</button>
+            <button class="slider-next">&#10095;</button>
+            <div class="slider-dots">
+              <% sliderImages.forEach(function(_, index) { %>
+                <span class="slider-dot<%= index === 0 ? ' active' : '' %>" data-index="<%= index %>"></span>
+              <% }); %>
+            </div>
+          </div>
+        </section>
         <% } else { %>
-          <p>No products yet. Visit the <a href="/admin">admin dashboard</a> to add some.</p>
+        <section class="hero-banner">
+          <div class="hero-content">
+            <h1>Upgrade your setup</h1>
+            <p>Shop the latest laptops, gaming rigs, and accessories.</p>
+            <a href="#products" class="btn-primary">Shop deals</a>
+          </div>
+        </section>
+        <% } %>
+
+        <% if (specialProducts && specialProducts.length > 0) { %>
+        <section class="special-products-section">
+          <h2>Special Products</h2>
+          <div class="special-products-grid">
+            <% specialProducts.forEach(function(product) { %>
+              <article class="special-product-card">
+                <a href="/product/<%= product.id %>">
+                  <div class="special-badge">Special</div>
+                  <div class="product-image-wrapper">
+                    <img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" />
+                  </div>
+                  <div class="product-info">
+                    <h3 class="product-title"><%= product.name %></h3>
+                    <% if (product.brand) { %>
+                      <p class="product-brand"><%= product.brand %></p>
+                    <% } %>
+                    <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                  </div>
+                </a>
+                <a href="/product/<%= product.id %>" class="btn-primary">Learn more</a>
+              </article>
+            <% }); %>
+          </div>
+        </section>
+        <% } %>
+
+        <% if (currentCategory && currentCategory !== 'all') { %>
+        <section id="products" class="product-grid-section">
+          <h2><%= categoryNames[currentCategory] || currentCategory %></h2>
+          <button class="product-slider-btn prev" onclick="scrollSlider(this, -220)">&#10094;</button>
+          <div class="product-grid" id="slider-<%= currentCategory %>">
+            <% if (products && products.length) { %>
+              <% products.forEach(function(product) { %>
+                <article class="product-card">
+                  <a href="/product/<%= product.id %>">
+                    <div class="product-image-wrapper">
+                      <img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" />
+                    </div>
+                    <div class="product-info">
+                      <h3 class="product-title"><%= product.name %></h3>
+                      <% if (product.brand) { %>
+                        <p class="product-brand"><%= product.brand %></p>
+                      <% } %>
+                      <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                    </div>
+                  </a>
+                  <a href="/product/<%= product.id %>" class="btn-secondary">Learn more</a>
+                </article>
+              <% }); %>
+            <% } else { %>
+              <p>No products found in this category.</p>
+            <% } %>
+          </div>
+          <button class="product-slider-btn next" onclick="scrollSlider(this, 220)">&#10095;</button>
+        </section>
+        <% } else { %>
+          <% categories.forEach(function(category) { %>
+            <% var categoryProducts = allProducts.filter(function(p) { return p.category === category; }); %>
+            <% if (categoryProducts.length > 0) { %>
+              <section id="products" class="product-grid-section">
+                <h2><%= categoryNames[category] %></h2>
+                <button class="product-slider-btn prev" onclick="scrollSlider(this, -220)">&#10094;</button>
+                <div class="product-grid" id="slider-<%= category %>">
+                  <% categoryProducts.forEach(function(product) { %>
+                    <article class="product-card">
+                      <a href="/product/<%= product.id %>">
+                        <div class="product-image-wrapper">
+                          <img src="<%= product.image_url || '/images/placeholder-laptop.jpg' %>" alt="<%= product.name %>" />
+                        </div>
+                        <div class="product-info">
+                          <h3 class="product-title"><%= product.name %></h3>
+                          <% if (product.brand) { %>
+                            <p class="product-brand"><%= product.brand %></p>
+                          <% } %>
+                          <p class="product-price">$<%= product.price.toFixed(2) %></p>
+                        </div>
+                      </a>
+                      <a href="/product/<%= product.id %>" class="btn-secondary">Learn more</a>
+                    </article>
+                  <% }); %>
+                </div>
+                <button class="product-slider-btn next" onclick="scrollSlider(this, 220)">&#10095;</button>
+              </section>
+            <% } %>
+          <% }); %>
         <% } %>
       </div>
-    </section>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -99,5 +202,55 @@
       <span>© <%= new Date().getFullYear() %> Ariatech Computers</span>
     </div>
   </footer>
+
+  <% if (sliderImages && sliderImages.length > 0) { %>
+  <script>
+    (function() {
+      const slides = document.querySelectorAll('.slider-slide');
+      const dots = document.querySelectorAll('.slider-dot');
+      const prevBtn = document.querySelector('.slider-prev');
+      const nextBtn = document.querySelector('.slider-next');
+      let currentSlide = 0;
+      const totalSlides = slides.length;
+
+      function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        showSlide((currentSlide + 1) % totalSlides);
+      }
+
+      function prevSlide() {
+        showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+      }
+
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+      
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          showSlide(parseInt(dot.dataset.index));
+        });
+      });
+
+      setInterval(nextSlide, 5000);
+    })();
+  </script>
+  <% } %>
+
+  <script>
+    function scrollSlider(btn, scrollAmount) {
+      const slider = btn.parentElement.querySelector('.product-grid');
+      slider.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  </script>
 </body>
 </html>

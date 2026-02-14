@@ -44,6 +44,12 @@
       color: #666;
       word-break: break-all;
     }
+
+    .categories{
+      height: 40px;
+      padding: 4px;
+      font-size: 17px;
+    }
   </style>
 </head>
 
@@ -68,7 +74,19 @@
       </div>
       <div class="form-row">
         <label for="category">Category</label>
-        <input type="text" id="category" name="category" placeholder="Laptops, Desktops, Accessories" />
+        <select id="category" name="category" class="categories">
+          <option selected disabled>Select a category</option>
+          <option value="computer-parts">Computer Parts</option>
+          <option value="oem-packages">OEM Packages</option>
+          <option value="computer">Computer</option>
+          <option value="peripherals">Peripherals</option>
+          <option value="storage">Storage</option>
+          <option value="games-and-hobbies">Games and Hobbies</option>
+          <option value="network">Network</option>
+          <option value="office-supplies">Office Supplies</option>
+          <option value="software">Software</option>
+          <option value="accessory">Accessory</option>
+        </select>
       </div>
       <div class="form-row">
         <label for="price">Price (USD) *</label>
@@ -87,6 +105,12 @@
       <div class="form-row">
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="4"></textarea>
+      </div>
+      <div class="form-row checkbox-row">
+        <label>
+          <input type="checkbox" id="isSpecial" name="isSpecial" value="true" />
+          Mark as Special Product
+        </label>
       </div>
       <div class="form-actions">
         <a href="/admin" class="btn-secondary">Cancel</a>
