@@ -94,6 +94,19 @@ async function deleteProduct(id) {
   return !error;
 }
 
+async function updateProduct(id, product) {
+  const { data, error } = await supabase
+    .from('products')
+    .update(product)
+    .eq('id', id)
+    .select();
+  if (error) {
+    console.error('Error updating product:', error);
+    return null;
+  }
+  return data[0];
+}
+
 async function getSliderImages() {
   const { data, error } = await supabase
     .from('slider_images')
@@ -242,6 +255,41 @@ app.get('/admin', isAuthenticated, async (req, res) => {
 
 app.get('/admin/products/new', isAuthenticated, (req, res) => {
   res.render('admin/new-product');
+});
+
+app.get('/admin/products/:id/edit', isAuthenticated, async (req, res) => {
+  const product = await getProduct(req.params.id);
+  if (!product) {
+    return res.redirect('/admin');
+  }
+  res.render('admin/edit-product', { product });
+});
+
+app.post('/admin/products/:id', isAuthenticated, upload.single('imageFile'), async (req, res) => {
+  const { name, brand, price, category, imageUrl, description, isSpecial } = req.body;
+
+  if (!name || !price) {
+    return res.status(400).send('Name and price are required');
+  }
+
+  let finalImageUrl = imageUrl || null;
+
+  const product = {
+    name,
+    brand: brand || null,
+    price: parseFloat(price),
+    category: category || 'Other',
+    image_url: finalImageUrl,
+    description: description || null,
+    is_special: isSpecial === 'true' ? true : false
+  };
+
+  const result = await updateProduct(req.params.id, product);
+  if (!result) {
+    return res.status(500).send('Error updating product');
+  }
+
+  res.redirect('/admin');
 });
 
 app.post('/admin/products', isAuthenticated, upload.single('imageFile'), async (req, res) => {

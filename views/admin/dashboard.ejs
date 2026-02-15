@@ -84,6 +84,7 @@
                 <td><%= product.category || '-' %></td>
                 <td>$<%= product.price.toFixed(2) %></td>
                 <td class="admin-actions">
+                  <a href="/admin/products/<%= product.id %>/edit" class="btn-secondary">Edit</a>
                   <form action="/admin/products/<%= product.id %>/delete" method="post" onsubmit="return confirm('Delete this product?');">
                     <button type="submit" class="btn-danger">Delete</button>
                   </form>
@@ -120,6 +121,7 @@
                 <td><%= product.category || '-' %></td>
                 <td>$<%= product.price.toFixed(2) %></td>
                 <td class="admin-actions">
+                  <a href="/admin/products/<%= product.id %>/edit" class="btn-secondary">Edit</a>
                   <form action="/admin/products/<%= product.id %>/delete" method="post" onsubmit="return confirm('Delete this product?');">
                     <button type="submit" class="btn-danger">Delete</button>
                   </form>
