@@ -15,7 +15,7 @@
         <span class="nav-bold">Your City</span>
       </div>
     </div>
-    <div class="nav-center">
+    <div class="nav-center" id="searchCenter">
       <form class="search-bar" action="/" method="get">
         <select name="category" class="search-category">
           <option value="all">All</option>
@@ -34,6 +34,9 @@
       </form>
     </div>
     <div class="nav-right">
+      <button class="search-toggle" id="searchToggle" aria-label="Toggle search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
       <a href="/admin" class="nav-link">Admin</a>
       <a href="#" class="nav-link">Orders</a>
       <a href="#" class="nav-link cart-link">Cart</a>
@@ -251,6 +254,10 @@
         behavior: 'smooth'
       });
     }
+
+    document.getElementById('searchToggle').addEventListener('click', function() {
+      document.getElementById('searchCenter').classList.toggle('active');
+    });
   </script>
 </body>
 </html>
