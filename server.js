@@ -215,6 +215,10 @@ app.get('/', async (req, res) => {
   res.render('store/index', { products, sliderImages, currentCategory, categories, categoryNames, allProducts, specialProducts });
 });
 
+app.get('/about', (req, res) => {
+  res.render('store/about');
+});
+
 app.get('/product/:id', async (req, res) => {
   const product = await getProduct(req.params.id);
   if (!product) {

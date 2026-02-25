@@ -1064,3 +1064,45 @@ a:hover {
     display: flex;
   }
 }
+
+.about-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+.about-section h1 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.about-intro {
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  color: var(--text-secondary);
+}
+
+.about-content h2 {
+  font-size: 1.3rem;
+  margin-top: 32px;
+  margin-bottom: 16px;
+  color: var(--cta-primary);
+}
+
+.about-content p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.about-content ul {
+  list-style: disc;
+  margin-left: 24px;
+  margin-bottom: 16px;
+}
+
+.about-content ul li {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}

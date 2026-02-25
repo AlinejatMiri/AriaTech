@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Ariatech Computers</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="/" class="logo">Ariatech</a>
+    </div>
+    <div class="nav-center">
+      <form class="search-bar" action="/" method="get">
+        <select name="category" class="search-category">
+          <option value="all">All</option>
+          <option value="computer-parts">Computer Parts</option>
+          <option value="computer">Computer</option>
+          <option value="peripherals">Peripherals</option>
+          <option value="storage">Storage</option>
+          <option value="games-and-hobbies">Games and Hobbies</option>
+          <option value="network">Network</option>
+          <option value="office-supplies">Office Supplies</option>
+          <option value="software">Software</option>
+          <option value="accessory">Accessory</option>
+        </select>
+        <input type="text" name="q" placeholder="Search Ariatech computers" class="search-input" />
+        <button class="search-button" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="nav-right">
+      <a href="/admin" class="nav-link">Admin</a>
+      <a href="#" class="nav-link">Orders</a>
+      <a href="#" class="nav-link cart-link">Cart</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-section">
+      <h1>About Ariatech</h1>
+      <p class="about-intro">Welcome to <strong>Ariatech Computers</strong>, your trusted destination for quality computers, parts, and accessories.</p>
+      
+      <div class="about-content">
+        <h2>Who We Are</h2>
+        <p>Ariatech is a premier computer retail store specializing in laptops, desktops, gaming rigs, and all the accessories you need to power your digital life. We serve customers seeking reliable technology solutions for home, office, and gaming use.</p>
+        
+        <h2>Our Products</h2>
+        <ul>
+          <li>Laptops & Desktops</li>
+          <li>Computer Parts (CPUs, GPUs, RAM, Storage)</li>
+          <li>Peripherals (Keyboards, Mice, Monitors)</li>
+          <li>Gaming Equipment</li>
+          <li>Networking Gear</li>
+          <li>Office Supplies & Software</li>
+        </ul>
+        
+        <h2>Why Choose Us?</h2>
+        <ul>
+          <li>Quality products from trusted brands</li>
+          <li>Competitive pricing</li>
+          <li>Friendly and knowledgeable staff</li>
+          <li>Fast and reliable service</li>
+        </ul>
+        
+        <h2>Contact Us</h2>
+        <p>Visit our store or reach out for any inquiries. We're here to help you find the perfect tech solutions.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a href="#" class="back-to-top">Back to top</a>
+    </div>
+    <div class="footer-columns">
+      <div>
+        <h4>Get to know us</h4>
+        <a href="/about">About Ariatech</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Make money with us</h4>
+        <a href="#">Sell computers</a>
+        <a href="#">Affiliate program</a>
+      </div>
+      <div>
+        <h4>Let us help you</h4>
+        <a href="#">Your account</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <%= new Date().getFullYear() %> Ariatech Computers</span>
+    </div>
+  </footer>
+</body>
+</html>
