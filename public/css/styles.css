@@ -1011,14 +1011,24 @@ a:hover {
 }
 
 @media (max-width: 500px) {
-  .search-bar {
-    flex-direction: column;
-    gap: 4px;
+  .nav-center{
+    display: flex;
     overflow-y: scroll;
   }
+  .search-bar {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
 
-  .search-category,
-  .search-input,
+  .search-category{
+    width: 25%;
+    border-radius: 4px;
+    height: 50px;
+  }
+  .search-input{
+    width: 50%;
+    border-radius: 4px;
+  }
   .search-button {
     width: 100%;
     border-radius: 4px;
