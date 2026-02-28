@@ -1014,7 +1014,7 @@ a:hover {
   .search-bar {
     flex-direction: column;
     gap: 4px;
-    overflow-y: auto;
+    overflow-y: scroll;
   }
 
   .search-category,
