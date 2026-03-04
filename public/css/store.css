@@ -476,51 +476,7 @@
   text-align: center;
 }
 
-.category-sidebar {
-  width: 280px;
-  background: var(--bg-card);
-  padding: 20px;
-  border-radius: 16px;
-  height: fit-content;
-  flex-shrink: 0;
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow);
-}
 
-.category-sidebar h3 {
-  font-size: 1.1rem;
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--cta-primary);
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.sidebar-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sidebar-menu li {
-  margin-bottom: 4px;
-}
-
-.sidebar-menu li a {
-  display: block;
-  padding: 12px 16px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  font-weight: 500;
-}
-
-.sidebar-menu li a:hover {
-  background-color: var(--border-default);
-  color: var(--cta-primary);
-}
 
 .about-section {
   max-width: 800px;

@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ariatech Computers - Online Store</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
   <link rel="stylesheet" href="/css/common.css" />
   <link rel="stylesheet" href="/css/store.css" />
+  <link rel="stylesheet" href="/css/sidebar.css">
 </head>
 <body class="theme-light">
   <header class="top-nav">
@@ -46,22 +48,23 @@
 
   <main>
     <div class="main-layout">
-      <aside class="category-sidebar" >
+      <div class="category-sidebar close" >
+        <button class="side-toggler"><i class="fa-solid fa-chevron-left toggle"></i></button>
         <h3>Categories</h3>
         <ul class="sidebar-menu">
-          <li><a href="/?category=all">All Products</a></li>
-          <li><a href="/?category=computer-parts">Computer Parts</a></li>
-          <li><a href="/?category=oem-packages">OEM Packages</a></li>
-          <li><a href="/?category=computer">Computer</a></li>
-          <li><a href="/?category=peripherals">Peripherals</a></li>
-          <li><a href="/?category=storage">Storage</a></li>
-          <li><a href="/?category=games-and-hobbies">Games and Hobbies</a></li>
-          <li><a href="/?category=network">Network</a></li>
-          <li><a href="/?category=office-supplies">Office Supplies</a></li>
-          <li><a href="/?category=software">Software</a></li>
-          <li><a href="/?category=accessory">Accessory</a></li>
+          <li class="sidebar-link"><a href="/?category=all">All Products</a></li>
+          <li class="sidebar-link"><a href="/?category=computer-parts">Computer Parts</a></li>
+          <li class="sidebar-link"><a href="/?category=oem-packages">OEM Packages</a></li>
+          <li class="sidebar-link"><a href="/?category=computer">Computer</a></li>
+          <li class="sidebar-link"><a href="/?category=peripherals">Peripherals</a></li>
+          <li class="sidebar-link"><a href="/?category=storage">Storage</a></li>
+          <li class="sidebar-link"><a href="/?category=games-and-hobbies">Games and Hobbies</a></li>
+          <li class="sidebar-link"><a href="/?category=network">Network</a></li>
+          <li class="sidebar-link"><a href="/?category=office-supplies">Office Supplies</a></li>
+          <li class="sidebar-link"><a href="/?category=software">Software</a></li>
+          <li class="sidebar-link"><a href="/?category=accessory">Accessory</a></li>
         </ul>
-      </aside>
+      </div>
 
       <div class="slider-and-products">
         <% if (sliderImages && sliderImages.length > 0) { %>
@@ -260,5 +263,6 @@
       document.getElementById('searchCenter').classList.toggle('active');
     });
   </script>
+  <script src="/js/sideToggelr.js"></script>
 </body>
 </html>
