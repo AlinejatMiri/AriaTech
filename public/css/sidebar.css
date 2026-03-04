@@ -4,6 +4,7 @@
   height: 100%;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow);
+  overflow-y: auto;
   position: fixed;
   top: 72px;
   left: 0;
