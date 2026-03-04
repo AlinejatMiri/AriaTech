@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sell Your Computer - Ariatech</title>
+  <link rel="stylesheet" href="/css/common.css" />
+  <link rel="stylesheet" href="/css/store.css" />
+  <style>
+    .page-header {
+      background: linear-gradient(135deg, #232f3e 0%, #131921 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .content-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .feature-card {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+    }
+    .feature-card h3 {
+      color: #232f3e;
+      margin-bottom: 15px;
+    }
+    .cta-section {
+      background: #232f3e;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .cta-section h2 {
+      margin-bottom: 20px;
+    }
+    .cta-button {
+      display: inline-block;
+      background: #f08804;
+      color: #131921;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-top: 20px;
+      text-decoration: none;
+    }
+    .cta-button:hover {
+      background: #fa8900;
+    }
+    .steps-list {
+      list-style: none;
+      padding: 0;
+    }
+    .steps-list li {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .step-number {
+      background: #232f3e;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="theme-light">
+  <header class="top-nav">
+    <div class="nav-left">
+      <a href="/" class="logo">Ariatech</a>
+    </div>
+    <div class="nav-center">
+      <form class="search-bar" action="/" method="get">
+        <select name="category" class="search-category">
+          <option value="all">All</option>
+          <option value="computer-parts">Computer Parts</option>
+          <option value="computer">Computer</option>
+          <option value="peripherals">Peripherals</option>
+          <option value="storage">Storage</option>
+        </select>
+        <input type="text" name="q" placeholder="Search Ariatech computers" class="search-input" />
+        <button class="search-button" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="nav-right">
+      <a href="/admin" class="nav-link">Admin</a>
+      <a href="#" class="nav-link">Cart</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <h1>Sell Your Computer</h1>
+      <p>Turn your old tech into cash. Fast, easy, and secure.</p>
+    </section>
+
+    <section class="content-section">
+      <h2>Why Sell to Ariatech?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Fast Payment</h3>
+          <p>Get paid within 24 hours via bank transfer or PayPal after we receive and verify your device.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Free Shipping</h3>
+          <p>We provide a prepaid shipping label. Sending your device to us costs you nothing.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Data Security</h3>
+          <p>We wipe all data securely. Your personal information is protected and never shared.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Best Prices</h3>
+          <p>Our pricing is competitive. We offer fair market value for all brands and models.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Eco-Friendly</h3>
+          <p>Recycle your old tech responsibly. We refurbish what we can and recycle the rest.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Easy Process</h3>
+          <p>Get a quote in minutes. Simple online form, no hassle, no hidden fees.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>How It Works</h2>
+      <ul class="steps-list">
+        <li>
+          <span class="step-number">1</span>
+          <div>
+            <h3>Get a Quote</h3>
+            <p>Fill out our online form with details about your computer - brand, model, condition, and specifications.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-number">2</span>
+          <div>
+            <h3>Ship Your Device</h3>
+            <p>Use our prepaid shipping label to send your computer to us. We'll email you the label instantly.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-number">3</span>
+          <div>
+            <h3>Get Paid</h3>
+            <p>Once we inspect and verify your device matches the description, we'll send your payment within 24 hours.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Sell?</h2>
+      <p>Get your free quote today and see how much your computer is worth.</p>
+      <a href="#" class="cta-button">Get Your Quote</a>
+    </section>
+
+    <section class="content-section">
+      <h2>What We Accept</h2>
+      <p>We buy all types of computers including:</p>
+      <ul>
+        <li>Laptops (Windows, MacBook, Chromebook)</li>
+        <li>Desktop PCs</li>
+        <li>Gaming PCs</li>
+        <li>All-in-One Computers</li>
+        <li>Workstations</li>
+      </ul>
+      <p style="margin-top: 20px;"><strong>Condition:</strong> Working, damaged, or non-working - we buy them all. Even broken devices have value for parts.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a href="#" class="back-to-top">Back to top</a>
+    </div>
+    <div class="footer-columns">
+      <div>
+        <h4>Get to know us</h4>
+        <a href="/about">About Ariatech</a>
+        <a href="#">Careers</a>
+      </div>
+      <div>
+        <h4>Make money with us</h4>
+        <a href="/sell-computer">Sell computers</a>
+        <a href="/affiliate-program">Affiliate program</a>
+      </div>
+      <div>
+        <h4>Let us help you</h4>
+        <a href="#">Your account</a>
+        <a href="#">Help</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <%= new Date().getFullYear() %> Ariatech Computers</span>
+    </div>
+  </footer>
+</body>
+</html>

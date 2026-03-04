@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const session = require('express-session');
 const supabase = require('./lib/supabase');
+const { searchProducts } = require('./utils/search');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -189,13 +190,21 @@ async function uploadImage(file) {
 
 app.get('/', async (req, res) => {
   const currentCategory = req.query.category || 'all';
+  const searchQuery = req.query.q || '';
   const allProducts = await getProducts();
   const sliderImages = await getSliderImages();
   const specialProducts = allProducts.filter(p => p.is_special === true);
   
-  let products = allProducts;
-  if (currentCategory && currentCategory !== 'all') {
+  let products;
+  if (searchQuery) {
+    products = searchProducts(allProducts, searchQuery, {
+      category: currentCategory,
+      limit: 50
+    });
+  } else if (currentCategory && currentCategory !== 'all') {
     products = allProducts.filter(p => p.category === currentCategory);
+  } else {
+    products = allProducts;
   }
   
   const categories = ['computer-parts', 'oem-packages', 'computer', 'peripherals', 'storage', 'games-and-hobbies', 'network', 'office-supplies', 'software', 'accessory'];
@@ -217,6 +226,17 @@ app.get('/', async (req, res) => {
 
 app.get('/about', (req, res) => {
   res.render('store/about');
+});
+app.get('/contact', (req, res) => {
+  res.render('store/contact.ejs')
+})
+
+app.get('/sell-computer', (req, res) => {
+  res.render('store/sell-computer');
+});
+
+app.get('/affiliate-program', (req, res) => {
+  res.render('store/affiliate-program');
 });
 
 app.get('/product/:id', async (req, res) => {
