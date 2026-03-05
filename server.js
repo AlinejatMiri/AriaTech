@@ -9,7 +9,6 @@ const fetch = require('node-fetch');
 
 const { searchProducts } = require('./utils/search');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'ariatech123';
