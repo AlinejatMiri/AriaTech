@@ -7,10 +7,8 @@ function updateLayout() {
     if (mainLayout) {
         if (sidebar.classList.contains('close')) {
             mainLayout.classList.add('sidebar-closed');
-            toggle.classList.toggle('fa-chevron-left')
         } else {
             mainLayout.classList.remove('sidebar-closed');
-            toggle.classList.toggle('fa-chevron-right')
 
         }
     }
