@@ -9,12 +9,12 @@ const fetch = require('node-fetch');
 
 const { searchProducts } = require('./utils/search');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'ariatech123';
 
 const BUCKET_NAME = 'products';
-const LOGO_API_KEY = process.env.LOGO_API_KEY
 
 
 app.set('view engine', 'ejs');
