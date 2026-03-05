@@ -5,9 +5,8 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const session = require('express-session');
 const supabase = require('./lib/supabase');
-const fetch = require('node-fetch');
-
 const { searchProducts } = require('./utils/search');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
