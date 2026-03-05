@@ -319,7 +319,26 @@ a:hover {
   }
 }
 
+.menu-toggle {
+  display: none;
+  background: var(--cta-primary);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-inverse);
+  margin-right: 12px;
+}
+
+.menu-toggle i {
+  font-size: 1.2rem;
+}
+
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
   .top-nav {
     flex-wrap: wrap;
     row-gap: 8px;

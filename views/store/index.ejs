@@ -12,6 +12,9 @@
 <body class="theme-light">
   <header class="top-nav">
     <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <a href="/" class="logo">Ariatech</a>
       <div class="nav-location">
         <span class="nav-label">Deliver to</span>
@@ -184,8 +187,16 @@
     </div>
 
     <div class="brands">
-      <img src="" alt="brand name">
-    </div>
+      <% if (locals.logos){ %>
+      <% brandLogos.forEach(brnad=>{ %>
+      <img src=<%= brnad.logo %> alt=<%= brnad.name %>>
+      <% }) %>
+      <% }else{ %>
+        <p>no brand found</p>
+        <% } %>
+
+      </div>
+
   </main>
 
   <footer class="site-footer">

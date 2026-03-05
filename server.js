@@ -5,8 +5,10 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const session = require('express-session');
 const supabase = require('./lib/supabase');
-const { searchProducts } = require('./utils/search');
+const fetch = require('node-fetch');
 
+const { searchProducts } = require('./utils/search');
+const {getLogo} = require('./utils/logomiddleware')
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,6 +16,8 @@ const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'ariatech123';
 
 const BUCKET_NAME = 'products';
+const LOGO_API_KEY = process.env.LOGO_API_KEY
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -35,7 +39,7 @@ function isAuthenticated(req, res, next) {
   res.redirect('/admin/login');
 }
 
-const upload = multer({ 
+const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
@@ -47,16 +51,17 @@ const upload = multer({
   }
 });
 
+
 async function getProducts(category = null) {
   let query = supabase
     .from('products')
     .select('*')
     .order('created_at', { ascending: false });
-  
+
   if (category && category !== 'all') {
     query = query.eq('category', category);
   }
-  
+
   const { data, error } = await query;
   if (error) {
     console.error('Error fetching products:', error);
@@ -188,13 +193,15 @@ async function uploadImage(file) {
   return urlData.publicUrl;
 }
 
+ 
+
 app.get('/', async (req, res) => {
   const currentCategory = req.query.category || 'all';
   const searchQuery = req.query.q || '';
   const allProducts = await getProducts();
   const sliderImages = await getSliderImages();
   const specialProducts = allProducts.filter(p => p.is_special === true);
-  
+
   let products;
   if (searchQuery) {
     products = searchProducts(allProducts, searchQuery, {
@@ -206,7 +213,7 @@ app.get('/', async (req, res) => {
   } else {
     products = allProducts;
   }
-  
+
   const categories = ['computer-parts', 'oem-packages', 'computer', 'peripherals', 'storage', 'games-and-hobbies', 'network', 'office-supplies', 'software', 'accessory'];
   const categoryNames = {
     'computer-parts': 'Computer Parts',
@@ -220,7 +227,7 @@ app.get('/', async (req, res) => {
     'software': 'Software',
     'accessory': 'Accessory'
   };
-  
+
   res.render('store/index', { products, sliderImages, currentCategory, categories, categoryNames, allProducts, specialProducts });
 });
 
@@ -244,10 +251,10 @@ app.get('/product/:id', async (req, res) => {
   if (!product) {
     return res.status(404).render('store/not-found');
   }
-  
+
   const allProducts = await getProducts();
   const relatedProducts = allProducts.filter(p => p.category === product.category && p.id !== product.id);
-  
+
   res.render('store/product-detail', { product, relatedProducts });
 });
 
@@ -365,7 +372,7 @@ app.post('/admin/upload-image', isAuthenticated, upload.single('imageFile'), asy
 
   try {
     const imageUrl = await uploadImage(req.file);
-    
+
     if (!imageUrl) {
       return res.status(500).json({ error: 'Failed to upload image to Supabase' });
     }
@@ -383,7 +390,7 @@ app.post('/admin/upload-slider', isAuthenticated, upload.single('sliderFile'), a
 
   try {
     const imageUrl = await uploadSliderImage(req.file);
-    
+
     if (!imageUrl) {
       return res.status(500).json({ error: 'Failed to upload slider image to Supabase' });
     }
